@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: autoscale-worker # <-- Must match K8S_NS
+---
+# 2. Kubernetes Service Account
+# We create this via kubectl, but it needs the GSA annotation
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: worker-ksa # <-- Must match K8S_SA
+  namespace: autoscale-worker
+  annotations:
+    # This annotation links the KSA to the GSA
+    iam.gke.io/gcp-service-account: pubsub-worker-gsa@vhamburger-gke-tests.iam.gserviceaccount.com # <--- EDIT THIS
+---
+# 3. Deployment
+# This runs the worker pod
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+  namespace: autoscale-worker
+spec:
+  replicas: 1 # Start with 1 for the "before" scenario
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      serviceAccountName: worker-ksa # <-- Use our KSA
+      containers:
+        - name: worker
+          image: europe-central2-docker.pkg.dev/vhamburger-gke-tests/vh-gke-demo/autoscale-worker:v1.0.0 # <--- EDIT THIS (Your Image URI)
+          ports:
+            - name: metrics
+              containerPort: 2112
+          env:
+            - name: PROJECT_ID
+              value: "vhamburger-gke-tests" # <--- EDIT THIS
+            - name: SUBSCRIPTION_ID
+              value: "worktbd-sub" # <-- Should match SUB_ID
+          resources:
+            requests:
+              cpu: "100m" # Request low CPU
+              memory: "128Mi"
+            limits:
+              cpu: "250m" # Limit to low CPU to prove CPU scaling is bad
+              memory: "256Mi"
+---
+# 4. Service
+# This exposes the /metrics port so Prometheus can scrape it
+apiVersion: v1
+kind: Service
+metadata:
+  name: worker-service
+  namespace: autoscale-worker
+  annotations:
+    # This annotation is required for GKE's managed Prometheus
+    # to discover and scrape the /metrics endpoint.
+    prometheus.googleapis.com/scrape: "true"
+    prometheus.googleapis.com/port: "2112"
+    prometheus.googleapis.com/path: "/metrics"
+spec:
+  selector:
+    app: worker
+  ports:
+    - name: metrics
+      port: 2112
+      targetPort: metrics
+

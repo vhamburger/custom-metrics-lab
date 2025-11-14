@@ -1,0 +1,14 @@
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: "worker-metrics-exporter"
+  namespace: autoscale-worker
+spec:
+  selector:
+    matchLabels:
+      app: worker
+  endpoints:
+  - port: 8080
+    path: /metrics
+    interval: 15s
+
