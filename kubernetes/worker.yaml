@@ -12,7 +12,7 @@ metadata:
   namespace: autoscale-worker
   annotations:
     # This annotation links the KSA to the GSA
-    iam.gke.io/gcp-service-account: pubsub-worker-gsa@vhamburger-gke-tests.iam.gserviceaccount.com # <--- EDIT THIS
+    iam.gke.io/gcp-service-account: <GSA> # <--- EDIT THIS
 ---
 # 3. Deployment
 # This runs the worker pod
@@ -34,7 +34,7 @@ spec:
       serviceAccountName: worker-ksa # <-- Use our KSA
       containers:
         - name: worker
-          image: europe-central2-docker.pkg.dev/vhamburger-gke-tests/vh-gke-demo/autoscale-worker:v1.0.0 # <--- EDIT THIS (Your Image URI)
+          image: <IMAGE URI> # <--- EDIT THIS (Your Image URI)
           ports:
             - name: metrics
               containerPort: 2112
