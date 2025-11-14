@@ -40,9 +40,9 @@ spec:
               containerPort: 2112
           env:
             - name: PROJECT_ID
-              value: "vhamburger-gke-tests" # <--- EDIT THIS
+              value: "<YOUR PROJECT_ID>" # <--- EDIT THIS
             - name: SUBSCRIPTION_ID
-              value: "worktbd-sub" # <-- Should match SUB_ID
+              value: "<YOUR SUB ID>" # <-- Should match SUB_ID
           resources:
             requests:
               cpu: "100m" # Request low CPU
