@@ -21,7 +21,7 @@ spec:
       policies:
       - periodSeconds: 5
         type: Percent
-        value: 100go mod init pho
+        value: 100
       - periodSeconds: 5
         type: Pods
         value: 5
