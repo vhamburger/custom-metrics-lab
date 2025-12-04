@@ -1,5 +1,3 @@
-package main
-
 import (
 	"context"
 	"log"
@@ -95,6 +93,13 @@ func main() {
 	sub := client.Subscription(subscriptionID)
 	// CRITICAL: This ensures the pod only ever works on one message at a time.
 	sub.ReceiveSettings.MaxOutstandingMessages = 1
+	// 2. Strict Byte Limit (The "1-Byte" Trick)
+	// This forces the client to stop pulling immediately after the first message,
+	// even if that message is tiny (e.g., "hello world").
+	sub.ReceiveSettings.MaxOutstandingBytes = 1
+	// 3. Strict Concurrency
+	// Since we are only processing one thing, we don't need multiple threads.
+	sub.ReceiveSettings.NumGoroutines = 1
 
 	// Receive blocks until the context is cancelled.
 	err = sub.Receive(ctx, func(ctx context.Context, msg *pubsub.Message) {
@@ -178,4 +183,3 @@ func getEnv(key, fallback string) string {
 	}
 	return fallback
 }
-
