@@ -15,7 +15,7 @@ A Go worker processes messages from a Pub/Sub queue. Each job requires 90 second
 
 ## Getting Started
 
-Follow docs/lab_guide.md to get started. 
+Follow LabGuide.md to get started. 
 
 ## Cleanup
 Follow Step 6 in docs/lab_guide.md to destroy all cloud resources.
