@@ -65,4 +65,4 @@ Confirm your image is uploaded and ready for GKE.# List images in the repository
 
     gcloud artifacts docker images list "${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}"
 
-You should see your autoscale-worker image with the tag v1.0.0. You can now use the IMAGE_URI variable in the main lab guide.
+You should see your autoscale-worker image with the tag v1.0.0. You can now use the ${IMAGE_URI} variable in the main lab guide.
