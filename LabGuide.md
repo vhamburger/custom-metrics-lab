@@ -125,9 +125,9 @@ Now we deploy our worker pod using the manifests in kubernetes/gke\_manifests.ya
 
 We'll prove that CPU scaling may be difficult to unsuitable.
 
-\# 1\. Apply the CPU HPA (hpa-cpu.yaml)  
+\# 1\. Apply the CPU HPA (hpa_cpu.yaml)  
 
-    kubectl apply -f kubernetes/hpa-cpu.yaml
+    kubectl apply -f kubernetes/hpa_cpu.yaml
 
 \# 2\. Open a SECOND Cloud Shell tab  
 \#    Watch the HPA:  
@@ -147,7 +147,7 @@ We'll prove that CPU scaling may be difficult to unsuitable.
 \# 5\. In your FIRST tab, start the publisher in "auto" mode  
 \#    (cd into the 'publisher' directory first)  
 
-    go run . auto "${PROJECT\_ID}" "${TOPIC\_ID}" "${SUB\_ID}"
+    go run . auto "${PROJECT_ID}" "${TOPIC_ID}" "${SUB_ID}"
 
 **What you will observe:**
 
