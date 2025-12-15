@@ -15,8 +15,7 @@ A Go worker processes messages from a Pub/Sub queue. Each job requires 90 second
 
 ## Getting Started
 
-1. Build and Push the Worker: Follow the instructions in building_the_worker.md to containerize the application.
-2. Start the Lab: Open docs/lab_guide.md and follow the steps from Step 0 onwards to set up GKE, IAM, and run the comparison test.
+Follow docs/lab_guide.md to get started. 
 
 ## Cleanup
 Follow Step 6 in docs/lab_guide.md to destroy all cloud resources.
