@@ -15,7 +15,7 @@ A Go worker processes messages from a Pub/Sub queue. Each job requires 90 second
 
 ## Getting Started
 
-Follow LabGuide.md to get started. 
+Follow [LabGuide](https://github.com/vhamburger/custom-metrics-lab/blob/main/LabGuide.md) to get started. 
 
 ## Cleanup
-Follow Step 6 in docs/lab_guide.md to destroy all cloud resources.
+Follow Step 6 in [LabGuide](https://github.com/vhamburger/custom-metrics-lab/blob/main/LabGuide.md) to destroy all cloud resources.
