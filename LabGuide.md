@@ -5,6 +5,8 @@
 Scenario:  
 We have a worker that pulls jobs from a Pub/Sub queue. Each job takes 90 seconds to complete but consumes very little CPU. A CPU-based HPA will fail to scale, leading to a long backlog. An HPA that reads our custom metric, autoscale\_lab\_jobs\_in\_queue, will scale correctly and process the queue quickly.
 
+### If you have not yet built the image, complete the steps in the [BuildGuide](https://github.com/vhamburger/custom-metrics-lab/blob/main/BuildGuide.md) first before proceeding! 
+
 ## **Step 0: Set Environment Variables**
 
 Open Cloud Shell and run these commands to configure your environment.
