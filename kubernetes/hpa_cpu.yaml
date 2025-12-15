@@ -1,0 +1,21 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: worker-hpa-cpu
+  namespace: autoscale-lab # IMPORTANT: Same namespace as the Deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: worker-deployment # Name of your Deployment
+  minReplicas: 1
+  maxReplicas: 18 # Maximum 10 pods
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        # This is the "Before" test
+        # We scale on 50% CPU, which will never be reached
+        averageUtilization: 50
