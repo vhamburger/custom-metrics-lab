@@ -1,7 +1,7 @@
 # Build Guide: 
 Building and Pushing the Worker ImageThese instructions will guide you through setting up Google Artifact Registry, building the worker Go application into a Docker container, and pushing it to the registry so GKE can access it.Run these commands from your Cloud Shell or a local terminal where gcloud and docker are installed.
 
-### Prerequisites: 
+### 1. Prerequisites: 
 * Set Environment VariablesFirst, set up variables to make the commands easier to run.
 
 #### 1. Set your Google Cloud Project ID
