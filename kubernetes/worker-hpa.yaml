@@ -32,7 +32,7 @@ spec:
   - type: Pods
     pods:
       metric:
-        name: prometheus.googleapis.com|numJobs|gauge
+        name: autoscaling.gke.io|pubsub-autoscaling-metric|numjobs
       target:
         type: AverageValue
         averageValue: 1

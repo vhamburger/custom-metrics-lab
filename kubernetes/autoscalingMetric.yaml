@@ -1,0 +1,19 @@
+apiVersion: autoscaling.gke.io/v1beta1
+kind: AutoscalingMetric
+metadata:
+  name: pubsub-autoscaling-metric
+  namespace: autoscale-worker
+spec:
+  metrics:
+  - pod:
+      selector:
+        matchLabels:
+          app: worker
+      containers:
+      - endpoint:
+          port: metrics
+          path: /metrics
+        metrics:
+        - gauge:
+            name: numjobs
+            prometheusMetricName: numJobs

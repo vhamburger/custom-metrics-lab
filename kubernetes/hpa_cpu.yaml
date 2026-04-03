@@ -9,13 +9,12 @@ spec:
     kind: Deployment
     name: worker-deployment # Name of your Deployment
   minReplicas: 1
-  maxReplicas: 18 # Maximum 10 pods
+  maxReplicas: 18 # Maximum 18 pods
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        # This is the "Before" test
-        # We scale on 50% CPU, which will never be reached
-        averageUtilization: 50
+        # We scale on 60% CPU
+        averageUtilization: 60

@@ -37,7 +37,7 @@ spec:
           image: <IMAGE URI> # <--- EDIT THIS (Your Image URI)
           ports:
             - name: metrics
-              containerPort: 2112
+              containerPort: 8080
           env:
             - name: PROJECT_ID
               value: "<YOUR PROJECT_ID>" # <--- EDIT THIS
@@ -50,25 +50,3 @@ spec:
             limits:
               cpu: "250m" # Limit to low CPU to prove CPU scaling is bad
               memory: "256Mi"
----
-# 4. Service
-# This exposes the /metrics port so Prometheus can scrape it
-apiVersion: v1
-kind: Service
-metadata:
-  name: worker-service
-  namespace: autoscale-worker
-  annotations:
-    # This annotation is required for GKE's managed Prometheus
-    # to discover and scrape the /metrics endpoint.
-    prometheus.googleapis.com/scrape: "true"
-    prometheus.googleapis.com/port: "2112"
-    prometheus.googleapis.com/path: "/metrics"
-spec:
-  selector:
-    app: worker
-  ports:
-    - name: metrics
-      port: 2112
-      targetPort: metrics
-
